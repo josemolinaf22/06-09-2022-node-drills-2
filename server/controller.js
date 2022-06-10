@@ -20,6 +20,17 @@ module.exports = {
     `
       )
       .then((dbRes) => res.status(200).send(dbRes[0]))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("error getting info", err));
+  },
+  createInput: (req, res) => {
+    let { text } = req.body;
+
+    sequelize
+      .query(
+        `insert into input (text) 
+      values ('${text}');`
+      )
+      .then((dbRes) => res.status(200).send(dbRes[0]))
+      .catch((err) => console.log("error entering info", err));
   },
 };
